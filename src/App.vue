@@ -11,32 +11,33 @@ export default {
   data() {
     return {
       store: {},
+      searchTerm: "",
     };
-  },
-  mounted() {
-    this.loadData();
   },
   methods: {
     async loadData() {
       try {
         this.store.movies = await fetchData();
+        console.log(this.store);
       } catch (error) {
         console.error("Failed to load data:", error);
       }
     },
     handleSearch(searchTerm) {
-      this.store.apiUrl = `https://api.themoviedb.org/3/search/movie?query=${searchTerm}&api_key=${this.store.headers.Authorization}`;
-      this.loadData();
+      this.searchTerm = searchTerm;
+      this.loadData()
     },
+  },
+  mounted() {
+    this.loadData();
   },
 };
 </script>
 
 <template>
   <div>
-    <h1>ffytfjyuigg</h1>
     <searchBar @search="handleSearch" />
-    <moviesCard :info="store.movies" />
+    <moviesCard v-if="store.movies && store.movies.results" :info="store.movies.results" searchTerm="searchTerm" />
   </div>
 </template>
 
