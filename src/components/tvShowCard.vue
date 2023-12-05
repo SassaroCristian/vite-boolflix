@@ -4,7 +4,7 @@
 
         <div class="p-5 absolute top-0 left-0 w-full h-full overflow-scroll  bg-black bg-opacity-70 text-white"
             v-show="showDetails">
-            <p>Title: {{ info.title }}</p>
+            <p>Title: {{ info.name }}</p>
             <p>Language: {{ info.original_language }}</p>
             <p>Vote: {{ info.vote_average }}</p>
             <p>{{ info.overview }}</p>
@@ -14,7 +14,7 @@
   
 <script>
 export default {
-    name: "MoviesCard",
+    name: "TvShowCard",
     props: {
         info: Object,
     },
