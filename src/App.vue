@@ -51,7 +51,7 @@ export default {
     },
     async loadDataTvShow() {
       try {
-        this.storeTvShow.tvShows = await fetchDataTvShows(this.searchTermTvShow); // Use the correct function name
+        this.storeTvShow.tvShows = await fetchDataTvShows(this.searchTermTvShow);
         this.filteredDataTvShows = JSON.parse(JSON.stringify(this.storeTvShow.tvShows.results));
         console.log("TV Shows List:", this.storeTvShow.tvShows);
       } catch (error) {
