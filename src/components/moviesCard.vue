@@ -1,5 +1,5 @@
 <template>
-    <div class="w-64 bg-red-700 p-2 m-10 relative" @mouseover="showDetails = true" @mouseout="showDetails = false">
+    <div class=" w-64 bg-red-700 p-2 m-10 relative" @mouseover="showDetails = true" @mouseout="showDetails = false">
         <img :src="'https://image.tmdb.org/t/p/w500/' + info.poster_path" alt="" class="object-cover" v-show="!showDetails">
 
         <div class="p-5 absolute top-0 left-0 w-full h-full overflow-scroll  bg-black bg-opacity-70 text-white"

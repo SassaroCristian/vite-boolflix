@@ -79,19 +79,22 @@ export default {
 </script>
 
 <template>
-  <div>
+  <p class="text-white font-extrabold text-9xl p-5">Boolflix</p>
+  <div class="p-10">
     <searchBarMovies @search="handleSearchMovies" placeholder="Search Movies" />
-    <div class="flex flex-wrap m-auto" v-if="storeMovies.movies && storeMovies.movies.results">
-      <MoviesCard v-for="movie in filteredDataMovies" :info="movie" :key="movie.id" />
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
+      <div class=" inline-flex">
+        <MoviesCard v-for="movie in filteredDataMovies" :info="movie" :key="movie.id" />
+      </div>
     </div>
 
-    <div v-else>
-      Loading Content...
-    </div>
 
     <searchBarTvShows @search="handleSearchTvShows" placeholder="Search TV Shows" />
-    <div class="flex flex-wrap m-auto" v-if="storeTvShow.tvShows && storeTvShow.tvShows.results">
-      <TvShowCard v-for="tvShow in filteredDataTvShows" :info="tvShow" :key="tvShow.id" />
+
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
+      <div class="inline-flex">
+        <TvShowCard v-for="tvShow in filteredDataTvShows" :info="tvShow" :key="tvShow.id" />
+      </div>
     </div>
   </div>
 </template>
