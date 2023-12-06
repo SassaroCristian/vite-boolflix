@@ -6,17 +6,24 @@
         <div class="d-none p-5 absolute top-0 left-0 w-full h-full overflow-scroll  bg-black bg-opacity-70 text-white"
             v-show="showDetails">
             <p>Title: {{ info.title }}</p>
-            <p>{{ info.original_language }}</p>
-            <p>Language: <img class="flag_img" :src="getFlagPath(info.original_language)" alt="flag"></p>
-            <p>Vote: {{ info.vote_average }}</p>
+            <div class="flex">
+                <p>Language:</p><img class="flag_img ml-10" :src="getFlagPath(info.original_language)" alt="flag">
+            </div><br>
+            <p>Rating:
+                <StarRating :rating="info.vote_average" />
+            </p> <br>
             <p>{{ info.overview }}</p>
         </div>
     </div>
 </template>
   
 <script>
+import StarRating from './StarRating.vue';
 export default {
     name: "MoviesCard",
+    components: {
+        StarRating,
+    },
     props: {
         info: Object,
     },
