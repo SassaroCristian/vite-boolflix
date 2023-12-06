@@ -53,7 +53,6 @@ export default {
       try {
         this.storeTvShow.tvShows = await fetchDataTvShows(this.searchTermTvShow);
         this.filteredDataTvShows = JSON.parse(JSON.stringify(this.storeTvShow.tvShows.results));
-        console.log("TV Shows List:", this.storeTvShow.tvShows);
       } catch (error) {
         console.error("Failed to load TV show data:", error);
       }
@@ -79,8 +78,10 @@ export default {
 </script>
 
 <template>
-  <p class="text-white font-extrabold text-9xl p-5">Boolflix</p>
-  <div class="p-10">
+  <p class="bg-red-700 text-white font-extrabold text-9xl p-10">Boolflix</p>
+
+  <div class="p-10 ">
+    <p class="text-white font-extrabold text-6xl p-5"> MOVIES</p>
     <searchBarMovies @search="handleSearchMovies" placeholder="Search Movies" />
     <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
       <div class=" inline-flex">
@@ -88,7 +89,7 @@ export default {
       </div>
     </div>
 
-
+    <p class="text-white font-extrabold text-6xl p-5">TV SHOWS</p>
     <searchBarTvShows @search="handleSearchTvShows" placeholder="Search TV Shows" />
 
     <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
