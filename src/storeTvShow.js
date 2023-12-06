@@ -5,11 +5,10 @@ const storeTvShow = reactive({
     method: 'GET',
     url: 'https://api.themoviedb.org/3/discover/tv',
     params: {
-        include_adult: 'false',
-        include_null_first_air_dates: 'false',
+        include_adult: 'true',
         language: 'en-US',
         page: '1',
-        sort_by: 'popularity.desc'
+
     },
     headers: {
         accept: 'application/json',

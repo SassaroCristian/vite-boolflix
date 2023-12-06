@@ -1,17 +1,22 @@
 <script>
 import MoviesCard from "./components/moviesCard.vue";
+import TvShowCard from "./components/TvShowCard.vue";
+import UpcomingMoviesCard from "./components/UpcomingMoviesCard.vue";
 import searchBarMovies from "./components/searchBarMovies.vue";
 import searchBarTvShows from "./components/searchBarTvShows.vue";
-import TvShowCard from "./components/TvShowCard.vue";
+import searchBarUpcomingMovies from "./components/searchBarUpcomingMovies.vue";
 import { fetchData as fetchMoviesData } from "./storeMovies.js";
 import { fetchDataTvShows } from "./storeTvShow.js";
+import { fetchDataUpcomingMovies } from "./storeUpcomingMovies.js";
 
 export default {
   components: {
     MoviesCard,
     TvShowCard,
+    UpcomingMoviesCard,
     searchBarMovies,
     searchBarTvShows,
+    searchBarUpcomingMovies
   },
   data() {
     return {
@@ -19,24 +24,23 @@ export default {
         apiUrl: 'https://api.themoviedb.org/3/discover/movie',
         movies: [],
         filteredMovies: [],
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYmZjOGI1YjRf...(your token)'
-        }
       },
       storeTvShow: {
         apiUrl: 'https://api.themoviedb.org/3/discover/tv',
         tvShows: [],
         filteredTvShows: [],
-        headers: {
-          accept: 'application/json',
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYmZjOGI1YjRf...(your token)'
-        }
+      },
+      storeUpcomingMovies: {
+        apiUrl: 'https://api.themoviedb.org/3/movie/upcoming',
+        UpcomingMovies: [],
+        filteredUpcomingMovies: [],
       },
       searchTermMovies: "",
       searchTermTvShow: "",
+      searchTermUpcomingMovies: "",
       filteredDataMovies: [],
       filteredDataTvShows: [],
+      filteredDataUpcomingMovies: [],
     };
   },
   methods: {
@@ -56,6 +60,14 @@ export default {
         console.error("Failed to load TV show data:", error);
       }
     },
+    async loadDataUpcomingMovies() {
+      try {
+        this.storeUpcomingMovies.UpcomingMovies = await fetchDataUpcomingMovies(this.searchTermUpcomingMovies);
+        this.filteredDataUpcomingMovies = JSON.parse(JSON.stringify(this.storeUpcomingMovies.UpcomingMovies.results));
+      } catch (error) {
+        console.error("Failed  load TV show data:", error);
+      }
+    },
     handleSearchMovies(searchTermMovies) {
       this.searchTermMovies = searchTermMovies;
       this.filteredDataMovies = this.storeMovies.movies.results.filter((el) => {
@@ -67,11 +79,18 @@ export default {
       this.filteredDataTvShows = this.storeTvShow.tvShows.results.filter((el) => {
         return el.name.toLowerCase().includes(this.searchTermTvShow.toLowerCase());
       });
+    },
+    handleSearchUpcomingMovies(searchTermUpcomingMovies) {
+      this.searchTermUpcomingMovies = searchTermUpcomingMovies;
+      this.filteredDataUpcomingMovies = this.storeUpcomingMovies.UpcomingMovies.results.filter((el) => {
+        return el.title.toLowerCase().includes(this.searchTermUpcomingMovies.toLowerCase());
+      });
     }
   },
   mounted() {
     this.loadDataMovies();
     this.loadDataTvShow();
+    this.loadDataUpcomingMovies();
   },
 };
 </script>
@@ -85,6 +104,15 @@ export default {
     <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
       <div class=" inline-flex">
         <MoviesCard v-for="movie in filteredDataMovies" :info="movie" :key="movie.id" />
+      </div>
+    </div>
+
+    <p class="text-white font-extrabold text-6xl p-5">UPCOMING MOVIES</p>
+    <searchBarUpcomingMovies @search="handleSearchUpcomingMovies" placeholder="Search Upcoming Movies" />
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
+      <div class=" inline-flex">
+        <UpcomingMoviesCard v-for="upcomingMovie in filteredDataUpcomingMovies" :info="upcomingMovie"
+          :key="upcomingMovie.id" />
       </div>
     </div>
 
