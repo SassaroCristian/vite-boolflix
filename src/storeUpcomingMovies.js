@@ -16,7 +16,7 @@ export async function fetchDataUpcomingMovies() {
         const response = await axios.get(storeUpcomingMovies.url, { params: storeUpcomingMovies.params, headers: storeUpcomingMovies.headers });
         storeUpcomingMovies.data = response.data;
 
-        // Aggiungi il console log per vedere l'oggetto delle upcoming movies
+
         console.log('Upcoming Movies:', storeUpcomingMovies.data);
 
         return response.data;

@@ -101,16 +101,16 @@ export default {
   <div class="p-10 ">
     <p class="text-white font-extrabold text-6xl p-5"> MOVIES</p>
     <searchBarMovies @search="handleSearchMovies" placeholder="Search Movies" />
-    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
-      <div class=" inline-flex">
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto ">
+      <div class=" inline-flex ">
         <MoviesCard v-for="movie in filteredDataMovies" :info="movie" :key="movie.id" />
       </div>
     </div>
 
     <p class="text-white font-extrabold text-6xl p-5">UPCOMING MOVIES</p>
     <searchBarUpcomingMovies @search="handleSearchUpcomingMovies" placeholder="Search Upcoming Movies" />
-    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
-      <div class=" inline-flex">
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto ">
+      <div class=" inline-flex ">
         <UpcomingMoviesCard v-for="upcomingMovie in filteredDataUpcomingMovies" :info="upcomingMovie"
           :key="upcomingMovie.id" />
       </div>
@@ -119,8 +119,8 @@ export default {
     <p class="text-white font-extrabold text-6xl p-5">TV SHOWS</p>
     <searchBarTvShows @search="handleSearchTvShows" placeholder="Search TV Shows" />
 
-    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto">
-      <div class="inline-flex">
+    <div class="w-11/12 overflow-hidden overflow-x-scroll m-auto ">
+      <div class="inline-flex ">
         <TvShowCard v-for="tvShow in filteredDataTvShows" :info="tvShow" :key="tvShow.id" />
       </div>
     </div>
@@ -131,6 +131,3 @@ export default {
 @use './styles/general.scss';
 </style>
 
-<style lang="scss" scoped>
-@use './styles/partials/_variables.scss';
-</style>
